@@ -1,18 +1,19 @@
 const express = require('express');
 const path = require('path');
-const { pool, initDb } = require('./db'); // Import the db module
+const { pool, initDb } = require('./db');
 require('dotenv').config();
+
 const app = express();
 
-app.use(express.json()); // To parse JSON bodies
+app.use(express.json());
 
-// Call initDb to initialize the database when the server starts
+// Initialize database
 initDb();
 
-// Serve the React app's static files
+// Serve static files from the React build folder
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// Route to handle form submissions
+// API route for form submissions
 app.post('/submit', async (req, res) => {
   const { name, email } = req.body;
   try {
@@ -26,7 +27,7 @@ app.post('/submit', async (req, res) => {
   }
 });
 
-// Catch-all route for React routing
+// Fallback route to serve React frontend
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
