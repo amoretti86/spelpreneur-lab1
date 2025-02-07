@@ -23,11 +23,12 @@ app.post('/submit', async (req, res) => {
     );
     res.json({ message: 'User added successfully', user: result.rows[0] });
   } catch (err) {
+    console.error('Error saving user to database:', err);
     res.status(500).json({ error: 'Error saving user to database' });
   }
 });
 
-// Fallback route to serve React frontend
+// Fallback route to serve React frontend for any unmatched routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
