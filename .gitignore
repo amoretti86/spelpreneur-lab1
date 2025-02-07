@@ -1,1 +1,21 @@
-node_modules
+# Dependencies
+/node_modules
+
+# Environment Variables
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System Files
+.DS_Store
+
+# Heroku Build Artifacts
+/dist
+/tmp
+build/
+
+# Misc
+coverage/
